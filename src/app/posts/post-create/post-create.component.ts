@@ -13,9 +13,9 @@ import { PostsService } from "../posts.service";
 export class PostCreateComponent implements OnInit {
   enteredContent = '';
   enteredTitle = '';
+  post: Post;
   private mode = 'create';
   private postId: string;
-  private post: Post;
 
   constructor(public postsService: PostsService, public route: ActivatedRoute) { }
 
