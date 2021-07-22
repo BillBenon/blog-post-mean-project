@@ -57,6 +57,7 @@ export class PostsService {
     let postData: Post | FormData;
     if (typeof (image) === 'object') {
       postData = new FormData();
+      postData.append("id", id);
       postData.append("title", title);
       postData.append("content", content);
       postData.append("image", image, title);
@@ -67,7 +68,7 @@ export class PostsService {
       .subscribe(response => {
         const updatedPosts = [...this.posts];
         const oldPostIndex = updatedPosts.findIndex(p => p.id === id);
-        const post: Post = { id, title, content, imagePath: response.imagePath };
+        const post: Post = { id, title, content, imagePath: "" };
         updatedPosts[oldPostIndex] = post;
         this.posts = updatedPosts;
         this.postsUpdated.next([...this.posts]);
