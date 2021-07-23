@@ -33,8 +33,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatProgressSpinnerModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
     MatPaginatorModule,
     HttpClientModule
   ],
