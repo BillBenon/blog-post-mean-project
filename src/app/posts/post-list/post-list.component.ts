@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { PageEvent } from "@angular/material/paginator";
 import { Subscription } from "rxjs";
 
 import { Post } from '../post.model';
@@ -31,6 +32,10 @@ export class PostListComponent implements OnInit, OnDestroy {
       this.isLoading = false;
       this.posts = posts;
     });
+  }
+
+  onChangedPage(pageData: PageEvent) {
+    console.log(pageData);
   }
 
   onDelete(postId: string) {
