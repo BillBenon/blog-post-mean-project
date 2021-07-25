@@ -49,6 +49,9 @@ router.post("/login", (req, res, next) => {
         'noneb9587938*$(gnik$snakpumums)',
         { expiresIn: '1h'}
       );
+      res.status(200).json({
+        token
+      })
     })
     .catch(err => {
       return res.status(401).json({
