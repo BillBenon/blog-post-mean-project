@@ -27,4 +27,29 @@ router.post("/signup", (req, res, next) => {
     });
 });
 
+router.post("/login", (req, res, next) => {
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: "Authentication failed!"
+        });
+      }
+      return bcrypt.compare(req.body.password, user.password);
+    })
+    .then(result => {
+      if (!result) {
+        return res.status(401).json({
+          message: "Email or password is incorrect!"
+        });
+      }
+
+    })
+    .catch(err => {
+      return res.status(401).json({
+        message: "Authentication failed!"
+      });
+    });
+});
+
 module.exports = router;
