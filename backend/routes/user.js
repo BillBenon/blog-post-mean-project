@@ -48,7 +48,7 @@ router.post("/login", (req, res, next) => {
       }
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
-        'noneb9587938*$(gnik$snakpumums)',
+        "noneb9587938*$(gnik$snakpumums)",
         { expiresIn: '1h'}
       );
       res.status(200).json({
