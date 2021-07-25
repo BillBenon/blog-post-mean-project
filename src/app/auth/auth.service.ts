@@ -55,6 +55,10 @@ export class AuthService {
       });
   }
 
+  autoAuthUser() {
+
+  }
+
   logout() {
     this.token = null;
     this.isAuthenticated = false;
@@ -72,5 +76,17 @@ export class AuthService {
   private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
+  }
+
+  private getAuthData() {
+    const token = localStorage.getItem("token");
+    const expirationDate = localStorage.getItem("expiration");
+    if (!token || !expirationDate) {
+      return;
+    }
+    return {
+      token,
+      expirationDate: new Date(expirationDate)
+    }
   }
 }
