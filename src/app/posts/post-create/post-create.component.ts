@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 import { AuthService } from "src/app/auth/auth.service";
@@ -23,17 +23,25 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   private mode = 'create';
   private postId: string;
   private authStatusSub: Subscription;
+  private updatePostStatusSub: Subscription;
 
   constructor(
     public postsService: PostsService,
     public route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe(authStatus => {
+        this.isLoading = false;
+      });
+    this.updatePostStatusSub = this.postsService
+      .getPostUpdateStatusListener()
+      .subscribe(updateStatus => {
+        this.router.navigate(["/"]);
         this.isLoading = false;
       });
     this.form = new FormGroup({
@@ -104,5 +112,6 @@ export class PostCreateComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
+    this.updatePostStatusSub.unsubscribe();
   }
 }

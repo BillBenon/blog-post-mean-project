@@ -10,6 +10,7 @@ import { Post } from './post.model';
 export class PostsService {
   private posts: Post[] = [];
   private postsUpdated = new Subject<{ posts: Post[], postCount: number }>();
+  private postsUpdatedListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -40,6 +41,10 @@ export class PostsService {
 
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
+  }
+
+  getPostUpdateStatusListener() {
+    return this.postsUpdatedListener.asObservable();
   }
 
   getPost(id: string) {
@@ -73,6 +78,8 @@ export class PostsService {
     this.http.put("http://localhost:3000/api/posts/" + id, postData)
       .subscribe(response => {
         this.router.navigate(["/"]);
+      }, error => {
+        this.postsUpdatedListener.next(false);
       });
   }
 
