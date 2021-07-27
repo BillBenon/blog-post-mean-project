@@ -91,3 +91,18 @@ exports.getPost = (req, res, next) => {
     });
   });
 }
+
+exports.deletePost = (req, res, next) => {
+  Post.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(result => {
+    if (result.n > 0) {
+      res.status(200).json({ message: "Post deleted successfully!" });
+    } else {
+      res.status(403).json({ message: "Not authorized!" });
+    }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Deleting post failed!"
+    });
+  });;
+};
