@@ -59,9 +59,12 @@ router.put("/:id", checkAuth, multer({storage}).single("image"), (req, res, next
     content: req.body.content,
     imagePath
   });
-  Post.updateOne({_id: req.params.id}, post).then(result => {
-    res.status(200).json({ message: "Update successful!" });
-  })
+  Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {
+    if (result.nModified > 0) {
+    } else {
+      res.status(403).json({ message: "Forbidden!" });
+    }
+  });
 });
 
 router.get('', (req, res, next) => {
