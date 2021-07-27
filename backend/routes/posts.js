@@ -125,7 +125,7 @@ router.delete("/:id", checkAuth, (req, res, next) => {
     if (result.n > 0) {
       res.status(200).json({ message: "Post deleted successfully!" });
     } else {
-      res.status(403).json({ message: "Forbidden!" });
+      res.status(403).json({ message: "Not authorized!" });
     }
   })
   .catch(error => {
