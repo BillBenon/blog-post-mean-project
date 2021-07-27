@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest } from "@a
 import { throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 
-export class AuthInterceptor implements HttpInterceptor {
+export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return next.handle(req).pipe(
