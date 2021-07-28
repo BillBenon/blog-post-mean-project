@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Post } from './post.model';
 
-const BACKEND_URL = environment.apiUrl + "/posts";
+const BACKEND_URL = environment.apiUrl + "/posts/";
 
 @Injectable({ providedIn: 'root' })
 export class PostsService {
@@ -52,7 +52,7 @@ export class PostsService {
 
   getPost(id: string) {
     return this.http.get<{ _id: string, title: string, content: string, imagePath: string, creator: string }>(
-      BACKEND_URL + "/" + id
+      BACKEND_URL + id
     );
   }
 
@@ -78,7 +78,7 @@ export class PostsService {
     } else {
       postData = { id, title, content, imagePath: image, creator: null };
     }
-    this.http.put(BACKEND_URL + "/" + id, postData)
+    this.http.put(BACKEND_URL + id, postData)
       .subscribe(response => {
         this.router.navigate(["/"]);
       }, error => {
@@ -87,6 +87,6 @@ export class PostsService {
   }
 
   deletePost(postId: string) {
-    return this.http.delete(BACKEND_URL + "/" + postId);
+    return this.http.delete(BACKEND_URL + postId);
   }
 }
