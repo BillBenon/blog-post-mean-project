@@ -9,7 +9,7 @@ const userRoutes = require("./routes/user");
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/blog-post", {
+mongoose.connect(`mongodb+srv://billbenon:${process.env.MONGO_ATLAS_PW}@cluster0.aswk4.mongodb.net//blog-post`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
