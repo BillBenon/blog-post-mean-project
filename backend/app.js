@@ -40,8 +40,8 @@ app.use((req, res, next) => {
 
 app.use("/api/posts", postRoutes);
 app.use("/api/user", userRoutes);
-// app.use((req, res, next) => {
-//   res.sendFile()
-// })
+app.use((req, res, next) => {
+  res.sendFile(path.join("angular", "index.html"));
+});
 
 module.exports = app;
